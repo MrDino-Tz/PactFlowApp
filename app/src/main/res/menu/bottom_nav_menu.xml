@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_dashboard"
+        android:icon="@drawable/ic_dashboard"
+        android:title="Dashboard"
+        app:showAsAction="ifRoom"
+        android:visible="true"/>
+    <item
+        android:id="@+id/nav_contracts"
+        android:icon="@drawable/ic_contracts"
+        android:title="Contracts"
+        app:showAsAction="ifRoom"
+        android:visible="true"/>
+    <item
+        android:id="@+id/nav_workflow"
+        android:icon="@drawable/ic_workflow"
+        android:title="WorkFlow"
+        app:showAsAction="always"
+        android:visible="true"
+        />
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_profile"
+        android:title="Profile"
+        app:showAsAction="always"
+        android:visible="true"/>
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings"
+        app:showAsAction="always"
+        android:visible="true"/>
+</menu>
