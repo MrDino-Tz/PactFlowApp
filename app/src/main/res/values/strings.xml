@@ -11,6 +11,59 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+
+    <!-- Contract Types -->
+    <string-array name="contract_types">
+        <item>Service Agreement</item>
+        <item>Employment Contract</item>
+        <item>NDA</item>
+        <item>Lease Agreement</item>
+        <item>Other</item>
+    </string-array>
+
+    <!-- Empty State -->
+    <string name="no_contracts">No contracts</string>
+    <string name="no_contracts_title">No Contracts Yet</string>
+    <string name="no_contracts_message">You don\'t have any contracts yet. Create your first contract to get started.</string>
+    <string name="create_first_contract">Create First Contract</string>
+
+    <!-- Button Texts -->
+    <string name="add_contract">Add Contract</string>
+    <string name="view_drafts">View Drafts</string>
+
+    <!-- Placeholder -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Create Contract Form -->
+    <string name="title">Title</string>
+    <string name="amount">Amount</string>
+    <string name="contract_type">Contract Type</string>
+    <string name="description">Description</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="finalized">Finalized</string>
+    <string name="save">Save</string>
+    <string name="select_date">Select Date</string>
+    <string name="select_contract_type">Select Contract Type</string>
+
+    <!-- Contract Fields -->
+    <string name="is_finalized">Finalized</string>
+
+
+    <!-- Notifications -->
+    <string name="contract_created_title">Contract Created</string>
+    <string name="contract_created_message">New contract \"%1$s\" was created successfully</string>
+    <string name="contract_updated_title">Contract Updated</string>
+    <string name="contract_updated_message">Contract \"%1$s\" was updated successfully</string>
+
+
+    <string name="cancel">Cancel</string>
+
+    <!-- Messages -->
+    <string name="contract_saved">Contract saved successfully</string>
+    <string name="error_saving_contract">Error saving contract</string>
+    <string name="contract_saved_successfully">Contract saved successfully!</string>
+    <string name="field_required">This field is required</string>
+    <string name="invalid_amount">Please enter a valid amount</string>
 </resources>

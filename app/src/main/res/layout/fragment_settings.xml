@@ -1,57 +1,16 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/primary">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="20dp">
-        <!--  Notifications Toggle  -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:elevation="1dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Enable Notifications"
-                android:textSize="16sp"
-                android:textColor="@color/white"/>
-
-            <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/switch_notifications"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"/>
-
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="10dp"
-                android:layout_weight="1"
-                android:text="Enable Notifications"
-                android:textSize="6sp"
-                android:textColor="@color/black"/>
-
-
-        </LinearLayout>
-
-        <!--  Theme Selection  -->
+        <!--  Notifications Section  -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,32 +22,48 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="Theme"
-                android:textSize="16sp" />
+                android:layout_marginBottom="12dp"
+                android:text="Notifications"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
 
-            <RadioGroup
-                android:id="@+id/radio_theme"
+            <!-- Enable Notifications Toggle -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
 
-                <RadioButton
-                    android:id="@+id/radio_light"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Enable Notifications"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"/>
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switch_notifications"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="Light"
-                    />
+                    android:checked="false"/>
+            </LinearLayout>
 
-                <RadioButton
-                    android:id="@+id/radio_dark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Dark" />
-            </RadioGroup>
+            <!-- Demo Notification Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_demo_notification"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Show Demo Notification"
+                android:textColor="@color/white"
+                app:strokeColor="@color/white"
+                app:strokeWidth="1dp"/>
         </LinearLayout>
+
 
         <!--  About Info  -->
         <LinearLayout

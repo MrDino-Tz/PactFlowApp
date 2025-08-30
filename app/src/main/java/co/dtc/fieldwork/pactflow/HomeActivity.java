@@ -27,7 +27,7 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.nav_profile) {
                     selectedFragment = new ProfileFragment();
                 } else if (item.getItemId() == R.id.nav_settings) {
-                    selectedFragment = new SettingsFragment();
+                    selectedFragment = new co.dtc.fieldwork.pactflow.ui.settings.SettingsFragment();
                 }
                 if (selectedFragment != null) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();

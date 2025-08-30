@@ -1,432 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="start"
-    android:layout_marginTop="34dp"
-    android:padding="16dp">
-
-    <!-- Search Bar -->
-    <EditText
-        android:id="@+id/search_contracts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:hint="Search contracts..."
-        android:inputType="text"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
-        android:pointerIcon="hand"
-        android:drawableStart="@android:drawable/ic_menu_search"
-        android:background="@drawable/button_bg"
-        android:padding="10dp"
-        android:elevation="2dp"
-        android:layout_marginBottom="12dp" />
-
+    android:padding="8dp"
+    android:layout_marginTop="16dp"
+    android:background="@color/primary">
 
     <LinearLayout
-        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="16dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-
-        <Button
-            android:id="@+id/btn_add_contract"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
+        <!-- Search Bar -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/searchLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Add Contract"
-            android:backgroundTint="#FF6200EE"
-            android:textColor="#FFF"
-            android:layout_marginEnd="8dp" />
+            android:layout_marginBottom="16dp"
+            app:startIconDrawable="@android:drawable/ic_menu_search"
+            app:boxStrokeColor="@color/primary"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.RoundedCorners">
 
-        <Button
-            android:id="@+id/btn_draft_contracts"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Search contracts..."
+                android:textAppearance="@color/white"
+                android:drawableTint="@color/white"
+                android:inputType="text"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Buttons Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="View Draft Contracts"
-            android:backgroundTint="#FF018786"
-            android:textColor="@color/white" />
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddContract"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="Add Contract"
+                android:textColor="@color/white"
+                app:icon="@drawable/ic_add"
+                app:iconTint="@color/primary2"
+                app:strokeColor="@color/primary2"
+                app:strokeWidth="1dp"
+                app:cornerRadius="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDraftContracts"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Drafts"
+                android:textColor="@color/white"
+                app:icon="@drawable/ic_draft"
+                app:iconTint="@color/primary2"
+                app:strokeColor="@color/primary2"
+                app:strokeWidth="1dp"
+                app:cornerRadius="8dp" />
+        </LinearLayout>
+
+        <!-- Progress Bar -->
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:indicatorColor="@color/primary3"
+            android:visibility="gone" />
+
+
+        <!-- Contracts List -->
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvContracts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingTop="8dp"
+                android:paddingBottom="16dp"
+                android:contentDescription="RecyclerView"
+                android:scrollbars="vertical" />
+
+            <!-- Empty State -->
+            <include
+                android:id="@+id/layoutEmptyState"
+                layout="@layout/layout_empty_state"
+                android:visibility="gone" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 
 
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <!-- Contracts List -->
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:scrollbarStyle="insideInset"
-            android:scrollbarSize="3dp"
-            android:fadeScrollbars="true">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/bg_card_contracts"
-                    android:padding="14dp"
-                    android:layout_marginBottom="12dp"
-                    android:elevation="2dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Contract #101"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:textColor="#6200EE" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Client: Acme Corp"
-                        android:textColor="#555"
-                        android:textSize="14sp"
-                        android:layout_marginTop="2dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Status: Active"
-                        android:textColor="#388E3C"
-                        android:textSize="14sp"
-                        android:layout_marginTop="2dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expires: 2025-12-31"
-                        android:textColor="#888"
-                        android:textSize="13sp"
-                        android:layout_marginTop="2dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/bg_card_contracts"
-                    android:padding="14dp"
-                    android:layout_marginBottom="12dp"
-                    android:elevation="2dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Contract #99"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:textColor="#6200EE" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Client: Beta LLC"
-                        android:textColor="#555"
-                        android:textSize="14sp"
-                        android:layout_marginTop="2dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Status: Expired"
-                        android:textColor="#D32F2F"
-                        android:textSize="14sp"
-                        android:layout_marginTop="2dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expired: 2024-06-30"
-                        android:textColor="#888"
-                        android:textSize="13sp"
-                        android:layout_marginTop="2dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:background="@drawable/bg_card_contracts"
-                    android:elevation="2dp"
-                    android:orientation="vertical"
-                    android:padding="14dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Contract #95"
-                        android:textColor="#6200EE"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="Client: Gamma Inc"
-                        android:textColor="#555"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="Status: Active"
-                        android:textColor="#388E3C"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="Expires: 2026-03-15"
-                        android:textColor="#888"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/bg_card_contracts"
-                    android:padding="14dp"
-                    android:layout_marginBottom="12dp"
-                    android:elevation="2dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Contract #101"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:textColor="#6200EE" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Client: Acme Corp"
-                        android:textColor="#555"
-                        android:textSize="14sp"
-                        android:layout_marginTop="2dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Status: Active"
-                        android:textColor="#388E3C"
-                        android:textSize="14sp"
-                        android:layout_marginTop="2dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expires: 2025-12-31"
-                        android:textColor="#888"
-                        android:textSize="13sp"
-                        android:layout_marginTop="2dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/bg_card_contracts"
-                    android:padding="14dp"
-                    android:layout_marginBottom="12dp"
-                    android:elevation="2dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Contract #99"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:textColor="#6200EE" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Client: Beta LLC"
-                        android:textColor="#555"
-                        android:textSize="14sp"
-                        android:layout_marginTop="2dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Status: Expired"
-                        android:textColor="#D32F2F"
-                        android:textSize="14sp"
-                        android:layout_marginTop="2dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expired: 2024-06-30"
-                        android:textColor="#888"
-                        android:textSize="13sp"
-                        android:layout_marginTop="2dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/bg_card_contracts"
-                    android:padding="14dp"
-                    android:layout_marginBottom="12dp"
-                    android:elevation="2dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Contract #95"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:textColor="#6200EE" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Client: Gamma Inc"
-                        android:textColor="#555"
-                        android:textSize="14sp"
-                        android:layout_marginTop="2dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Status: Active"
-                        android:textColor="#388E3C"
-                        android:textSize="14sp"
-                        android:layout_marginTop="2dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expires: 2026-03-15"
-                        android:textColor="#888"
-                        android:textSize="13sp"
-                        android:layout_marginTop="2dp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/bg_card_contracts"
-                    android:padding="14dp"
-                    android:layout_marginBottom="12dp"
-                    android:elevation="2dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Contract #101"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:textColor="#6200EE" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Client: Acme Corp"
-                        android:textColor="#555"
-                        android:textSize="14sp"
-                        android:layout_marginTop="2dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Status: Active"
-                        android:textColor="#388E3C"
-                        android:textSize="14sp"
-                        android:layout_marginTop="2dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expires: 2025-12-31"
-                        android:textColor="#888"
-                        android:textSize="13sp"
-                        android:layout_marginTop="2dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/bg_card_contracts"
-                    android:padding="14dp"
-                    android:layout_marginBottom="12dp"
-                    android:elevation="2dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Contract #99"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:textColor="#6200EE" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Client: Beta LLC"
-                        android:textColor="#555"
-                        android:textSize="14sp"
-                        android:layout_marginTop="2dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Status: Expired"
-                        android:textColor="#D32F2F"
-                        android:textSize="14sp"
-                        android:layout_marginTop="2dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expired: 2024-06-30"
-                        android:textColor="#888"
-                        android:textSize="13sp"
-                        android:layout_marginTop="2dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/bg_card_contracts"
-                    android:padding="14dp"
-                    android:layout_marginBottom="12dp"
-                    android:elevation="2dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Contract #95"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:textColor="#6200EE" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Client: Gamma Inc"
-                        android:textColor="#555"
-                        android:textSize="14sp"
-                        android:layout_marginTop="2dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Status: Active"
-                        android:textColor="#388E3C"
-                        android:textSize="14sp"
-                        android:layout_marginTop="2dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expires: 2026-03-15"
-                        android:textColor="#888"
-                        android:textSize="13sp"
-                        android:layout_marginTop="2dp" />
-                </LinearLayout>
-
-            </LinearLayout>
-        </ScrollView>
-
-    </FrameLayout>
-
-
-</LinearLayout>
-
-
+</FrameLayout>
